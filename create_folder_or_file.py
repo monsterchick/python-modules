@@ -6,8 +6,14 @@ import os
 
 def write_file(path, data):
     message = ''
-    filename = path.rsplit('\\', 1)[1]
-
+    print(path)
+    if '\\' in path:
+        filename = path.rsplit('\\', 1)[1]
+    elif '/' in path:
+        filename = path.rsplit('/', 1)[1]
+    else:
+        print('write_file(path, data): path wrong. check it out')
+    print(filename)
     if os.path.exists(path) and data != '':
         message = f'The file "{filename}" already exists and has been updated.'
         with open(path, 'w') as f:
