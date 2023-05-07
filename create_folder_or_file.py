@@ -6,7 +6,6 @@ import os
 
 def write_file(path, data):
     message = ''
-    print(path)
     if '\\' in path:
         filename = path.rsplit('\\', 1)[1]
     elif '/' in path:
