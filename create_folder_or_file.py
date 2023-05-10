@@ -20,7 +20,7 @@ def write_file(path, data):
     else:
         with open(path, 'w') as f:
             f.write(data)
-        message =f'"{filename}" created successfully!'
+        message = f'"{filename}" created successfully!'
     print(message)
 
 
@@ -28,15 +28,15 @@ class Create:
     def __init__(self):
         pass
 
-    def mkdir(self, folder_name, subfolder_name=None):
+    def mkdir(self, folder_name, subfolder_name=''):
         '''Check if the given file name exists.'''
         # to only make mainfolder
-        if not os.path.isdir(folder_name) and subfolder_name is None:
+        if not os.path.isdir(folder_name) and subfolder_name =='':
             os.makedirs(folder_name)
             print(f"{folder_name} created successfully!")
 
         # to make mainfolder and subfolder
-        elif os.path.isdir(folder_name) and subfolder_name is not None:
+        elif os.path.isdir(folder_name) and subfolder_name !='':
             # 子目录
             # print(os.path.join(os.getcwd(),folder_name, subfolder_name))
             try:
@@ -45,7 +45,7 @@ class Create:
             except FileExistsError:
                 print(f"{folder_name}/{subfolder_name} already exists.")
 
-        elif not os.path.isdir(folder_name) and subfolder_name is not None:
+        elif not os.path.isdir(folder_name) and subfolder_name !='':
             os.makedirs(folder_name)
             os.makedirs(os.path.join(os.getcwd(), folder_name, subfolder_name))
             print(f"{folder_name} created successfully!")
@@ -100,7 +100,7 @@ class Create:
             # print('Case 3：文件不存在 | 有提供文件夹名称 | 没有提供数据')
 
         # Case 4：文件不存在 | 有提供文件夹名称 | 有提供数据
-        elif not os.path.exists(path_with_folder) and folder != '' and content !='':
+        elif not os.path.exists(path_with_folder) and folder != '' and content != '':
             # 反复尝试打开文件夹
             while True:
                 try:
@@ -123,19 +123,49 @@ class Create:
 
         # Case 7：文件存在 | 有提供文件夹名称 | 没有提供数据
         elif os.path.exists(path_with_folder) and folder != '' and content == '':
-            write_file(path_with_folder,data=content)
+            write_file(path_with_folder, data=content)
             # print('Case 7：文件存在 | 有提供文件夹名称 | 没有提供数据')
 
         # Case 8: 文件存在 | 有提供文件夹名称 | 有提供数据
         elif os.path.exists(path_with_folder) and folder != '' and content != '':
-            write_file(path_with_folder,data=content)
+            write_file(path_with_folder, data=content)
             # print('Case 8: 文件存在 | 有提供文件夹名称 | 有提供数据')
         else:
             pass
 
 
+class Start_Program:
+    def __init__(self):
+        self.mk = Create()
+
+    # 開始創建文件的程序
+    def start_mkdir(self):
+        try:
+            folder_name = input('Please input folder name: ')
+            subfolder_name = input('Please input subfolder_name: ')
+        except FileExistsError:
+            print('file exists')
+        self.mk.mkdir(folder_name=folder_name, subfolder_name=subfolder_name)
+
+    # 開始創建文件的程序
+    def start_mkfile(self):
+        filename = input('Please input filename: ')
+        data_str = input('Please input data: ')
+        folder = input('Please input a folder to save: ')
+        # 创建文件
+        self.mk.mkfile(filename=filename, folder=folder, content=data_str)
+
+
 # 创建文件夹/子文件夹
 # Create().mkdir(folder_name='download',subfolder_name='video')
-tem_data = 'this is own module!!!'
-# 创建文件
-Create().mkfile(filename='text.txt', content=tem_data)
+print('Please choose a service:\n1. make folder.\n2. Make file.')
+num_chose = int(input('Please select a number: '))
+if num_chose == 1:
+#     print(True)
+# else:print(False)
+    Start_Program().start_mkdir()
+elif num_chose == 2:
+    Start_Program().start_mkfile()
+else:
+    print('Please input a valid number.')
+    exit()
