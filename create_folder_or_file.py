@@ -132,10 +132,11 @@ class Create:
             # print('Case 8: 文件存在 | 有提供文件夹名称 | 有提供数据')
         else:
             pass
-
+        return folder_name, subfolder_name
 
 # 创建文件夹/子文件夹
 # Create().mkdir(folder_name='download',subfolder_name='video')
 tem_data = 'this is own module!!!'
+
 # 创建文件
-Create().mkfile(filename='text.txt', content=tem_data)
+# Create().mkfile(filename='text.txt', content=tem_data)
