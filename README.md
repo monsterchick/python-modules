@@ -1,3 +1,5 @@
 | Module | Description |
 | --- | --- |
-| create_folder_or_file.py | to generate folder or file |
+| folder_maker | to generate a folder including subfolder |
+| file_maker | to create a file |
+
